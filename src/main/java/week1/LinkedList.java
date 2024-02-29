@@ -62,7 +62,6 @@ public class LinkedList<Data> implements Iterable<Data> {
         if (index < 0 || index >= size) {										// 1
             throw new IndexOutOfBoundsException("Invalid linked list node.");	// 1
         }
-
         Node<Data> current = head;												// 2
         int i = 0;																// 3
         while (i < index) {														// 4
@@ -75,12 +74,43 @@ public class LinkedList<Data> implements Iterable<Data> {
 
     /* Add an element to a linked list by index (0-index) */
     public void add(int index, Data data) {
-        // your code
+        if(index < 0){
+            System.out.println("Cannot add an element at negative index");
+        }
+        Node<Data> newNode = new Node<>();
+        newNode.data = data;
+        if(index == 0){
+            newNode.next = head;
+            head = newNode;
+        }
+        Node<Data> current = head;
+        int currentIndex = 0;
+        while(current != null && currentIndex < index - 1){
+            current = current.next;
+            currentIndex++;
+        }
+        newNode.next = current.next;
+        current.next = newNode;
     }
 
     /* Delete an element from a linked list by index (0-index) */
     public void remove(int index) {
-        // your code
+        if(index < 0){
+            System.out.println("Cannot remove an element at negative index");
+        }
+        if(head == null){
+            System.out.println("Cannot remove from an empty list");
+        }
+        if(index == 0){
+            head = head.next;
+        }
+        Node<Data> current = head;
+        int currentIndex = 0;
+        while(current != null && currentIndex < index - 1){
+            current = current.next;
+            currentIndex++;
+        }
+        current.next = current.next.next;
     }
 
     public void reverse() {

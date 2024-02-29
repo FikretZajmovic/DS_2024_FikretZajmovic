@@ -33,6 +33,5 @@ public class Main {
         for (Integer i : list) {
             System.out.println(i);
         }
-
     }
 }

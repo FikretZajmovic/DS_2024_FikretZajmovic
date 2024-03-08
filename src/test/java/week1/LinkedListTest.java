@@ -7,16 +7,15 @@ import org.junit.jupiter.api.Test;
 import week1.LinkedList;
 
 public class LinkedListTest {
-
     @Test
     void testRemoveFromEmptyList() {
+        LinkedList<Integer> ll = new LinkedList<>();
         // Remove from empty list
         Exception e = assertThrows(IndexOutOfBoundsException.class, () -> {
-            LinkedList<Integer> ll = new LinkedList<>();
             ll.remove(0);
         });
 
-        assertEquals(e.getMessage(), "Invalid linked list node.");
+        assertEquals("Invalid linked list node.", e.getMessage());
     }
 
     @Test
@@ -30,8 +29,8 @@ public class LinkedListTest {
         ll.addToRear(9);
 
         ll.remove(0);
-        assertEquals(ll.count(), 5);
-        assertEquals(ll.get(0), 1);
+        assertEquals(5, ll.count());
+        assertEquals(1, ll.get(0));
     }
 
     @Test
@@ -45,7 +44,7 @@ public class LinkedListTest {
         ll.addToRear(9);
 
         ll.remove(5);
-        assertEquals(ll.count(), 5);
+        assertEquals(5, ll.count());
         assertThrows(IndexOutOfBoundsException.class, () -> {
             ll.remove(5);
         });
@@ -76,8 +75,8 @@ public class LinkedListTest {
         LinkedList<Integer> ll = new LinkedList<>();
 
         ll.add(0, 12);
-        assertEquals(ll.count(), 1);
-        assertEquals(ll.get(0), 12);
+        assertEquals(1, ll.count());
+        assertEquals(12, ll.get(0));
     }
 
     @Test
@@ -106,10 +105,9 @@ public class LinkedListTest {
         ll.addToRear(9);
 
         ll.add(5, 11);
-        assertEquals(ll.count(), 7);
-        assertEquals(ll.get(5), 11);
-        assertEquals(ll.get(6), 9);
-
+        assertEquals(7, ll.count());
+        assertEquals(11, ll.get(5));
+        assertEquals(9, ll.get(6));
     }
 
     @Test

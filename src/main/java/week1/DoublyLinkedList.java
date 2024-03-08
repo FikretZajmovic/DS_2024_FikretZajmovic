@@ -11,13 +11,12 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
     public void addToFront(Data data) {
         DoubleNode<Data> newNode = new DoubleNode<>();
         newNode.data = data;
-        if(head == null){
-            head = newNode;
-            tail = newNode;
-        }
-        else{
-            newNode.next = head;
+
+        if (head == null) {
+            head = tail = newNode;
+        } else {
             head.prev = newNode;
+            newNode.next = head;
             head = newNode;
         }
     }
@@ -43,13 +42,12 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
         newNode.data = data;
         if(tail == null){
             head = newNode;
-            tail = newNode;
         }
         else{
-            newNode.prev = tail;
             tail.next = newNode;
-            tail = newNode;
         }
+        newNode.prev = tail;
+        tail = newNode;
     }
 
     /* Remove a node at the end of the doubly linked list */
@@ -69,7 +67,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
 
     /* Get a linked list node by index (0-indexed) */
     public Data get(int index) {
-        if (index < 0 || index >= size) {										// 1
+        if (index < 0) {										// 1
             throw new IndexOutOfBoundsException("Invalid linked list node.");	// 1
         }
         DoubleNode<Data> current = head;
@@ -78,12 +76,15 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
             current = current.next;
             currentIndex++;
         }
+        if (current == null) {
+            throw new IndexOutOfBoundsException("Index out of bounds.");
+        }
         return current.data;
     }
 
     /* Add an element to a doubly linked list by index (0-index) */
     public void add(int index, Data data) {
-        if (index < 0 || index > size) {
+        if (index < 0) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         if (index == 0) {
@@ -105,7 +106,7 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
 
     /* Delete an element from a doubly linked list by index (0-index) */
     public void remove(int index) {
-        if (index < 0 || index >= size) {
+        if (index < 0) {
             throw new IndexOutOfBoundsException("Invalid index");
         }
         if (index == 0) {
@@ -132,7 +133,13 @@ public class DoublyLinkedList<Data> implements Iterable<Data> {
 
     /* Return the current size of the doubly linked list */
     public int count() {
-        return size;
+        int count = 0;
+        DoubleNode<Data> current = head;
+        while (current != null) {
+            count++;
+            current = current.next;
+        }
+        return count;
     }
 
     /* Return an Iterator Object */

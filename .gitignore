@@ -40,3 +40,4 @@ build/
 IP2LOCATION.csv
 raw_phonebook_data.csv
 sorted_phonebook_data.csv
+social_network.csv
